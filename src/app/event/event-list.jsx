@@ -33,202 +33,212 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Link, useNavigate } from "react-router-dom";
 
 const EventList = () => {
-  const {
-    data: eventData,
-    isLoading,
-    isError,
-    refetch,
-    isFetching,
-  } = useQuery({
-    queryKey: ["eventList"],
-    queryFn: async () => {
-      const token = Cookies.get("token");
-      const response = await axios.get(
-        `${BASE_URL}/api/event`,
-        {
-          headers: { 
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          },
-        }
-      );
-      return response.data.data;
-    },
-    keepPreviousData: true,
-    staleTime: 5 * 60 * 1000,
-  });
+//   const {
+//     data: eventData,
+//     isLoading,
+//     isError,
+//     refetch,
+//     isFetching,
+//   } = useQuery({
+//     queryKey: ["eventList"],
+//     queryFn: async () => {
+//       const token = Cookies.get("token");
+//       const response = await axios.get(
+//         `${BASE_URL}/api/event`,
+//         {
+//           headers: { 
+//             Authorization: `Bearer ${token}`,
+//             "Content-Type": "application/json"
+//           },
+//         }
+//       );
+//       return response.data.data;
+//     },
+//     keepPreviousData: true,
+//     staleTime: 5 * 60 * 1000,
+//   });
 
-  const [sorting, setSorting] = useState([]);
-  const [columnFilters, setColumnFilters] = useState([]);
-  const [columnVisibility, setColumnVisibility] = useState({});
-  const [rowSelection, setRowSelection] = useState({});
-  const [globalFilter, setGlobalFilter] = useState("");
-const navigate = useNavigate()
-  const columns = [
-    {
-      id: "S. No.",
-      header: "S. No.",
-      cell: ({ row }) => {
-        const globalIndex = row.index + 1;
-        return <div className="text-xs font-medium">{globalIndex}</div>;
-      },
-      size: 60,
-    },
-    {
-      accessorKey: "event_name",
-      id: "Event Name",
-      header: ({ column }) => (
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="px-2 h-8 text-xs"
-        >
-          Event Name
-          <ArrowUpDown className="ml-1 h-3 w-3" />
-        </Button>
-      ),
-      cell: ({ row }) => <div className="text-[13px] font-medium">{row.getValue("Event Name")}</div>,
-      size: 150,
-    },
-    {
-      accessorKey: "event_date",
-      id: "Event Date",
-      header: "Event Date",
-      cell: ({ row }) => <div className="text-xs font-medium">{row.getValue("Event Date")}</div>,
-      size: 120,
-    },
-    {
-      accessorKey: "event_time",
-      id: "Event Time",
-      header: "Event Time",
-      cell: ({ row }) => <div className="text-xs font-medium">{row.getValue("Event Time")}</div>,
-      size: 120,
-    },
-    {
-      accessorKey: "event_type",
-      id: "Event Type",
-      header: "Event Type",
-      cell: ({ row }) => <div className="text-xs font-medium">{row.getValue("Event Type")}</div>,
-      size: 120,
-    },
-    {
-      accessorKey: "event_for",
-      id: "Event For",
-      header: "Event For",
-      cell: ({ row }) => <div className="text-xs font-medium">{row.getValue("Event For")}</div>,
-      size: 120,
-    },
-    {
-      accessorKey: "event_status",
-      id: "Status",
-      header: "Status",
-      cell: ({ row }) => {
-        const status = row.getValue("Status");
-        const isActive = status === "Active";
-        return (
-          <div className={`text-xs font-medium px-3 py-1 rounded-md w-fit ${isActive ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}`}>
-            {status || "-"}
-          </div>
-        );
-      },
-      size: 120,
-    },
-    {
-      id: "actions",
-      header: "Action",
-      cell: ({ row }) => {
-        return (
-          <div className="flex flex-row">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button onClick={() => navigate(`/event-edit/${row.original.id}`)} variant="ghost" size="icon" className="h-8 w-8">
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Edit Event</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+//   const [sorting, setSorting] = useState([]);
+//   const [columnFilters, setColumnFilters] = useState([]);
+//   const [columnVisibility, setColumnVisibility] = useState({});
+//   const [rowSelection, setRowSelection] = useState({});
+//   const [globalFilter, setGlobalFilter] = useState("");
+// const navigate = useNavigate()
+//   const columns = [
+//     {
+//       id: "S. No.",
+//       header: "S. No.",
+//       cell: ({ row }) => {
+//         const globalIndex = row.index + 1;
+//         return <div className="text-xs font-medium">{globalIndex}</div>;
+//       },
+//       size: 60,
+//     },
+//     {
+//       accessorKey: "event_name",
+//       id: "Event Name",
+//       header: ({ column }) => (
+//         <Button
+//           variant="ghost"
+//           size="sm"
+//           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+//           className="px-2 h-8 text-xs"
+//         >
+//           Event Name
+//           <ArrowUpDown className="ml-1 h-3 w-3" />
+//         </Button>
+//       ),
+//       cell: ({ row }) => <div className="text-[13px] font-medium">{row.getValue("Event Name")}</div>,
+//       size: 150,
+//     },
+//     {
+//       accessorKey: "event_date",
+//       id: "Event Date",
+//       header: "Event Date",
+//       cell: ({ row }) => <div className="text-xs font-medium">{row.getValue("Event Date")}</div>,
+//       size: 120,
+//     },
+//     {
+//       accessorKey: "event_time",
+//       id: "Event Time",
+//       header: "Event Time",
+//       cell: ({ row }) => <div className="text-xs font-medium">{row.getValue("Event Time")}</div>,
+//       size: 120,
+//     },
+//     {
+//       accessorKey: "event_type",
+//       id: "Event Type",
+//       header: "Event Type",
+//       cell: ({ row }) => <div className="text-xs font-medium">{row.getValue("Event Type")}</div>,
+//       size: 120,
+//     },
+//     {
+//       accessorKey: "event_for",
+//       id: "Event For",
+//       header: "Event For",
+//       cell: ({ row }) => <div className="text-xs font-medium">{row.getValue("Event For")}</div>,
+//       size: 120,
+//     },
+//     {
+//       accessorKey: "event_status",
+//       id: "Status",
+//       header: "Status",
+//       cell: ({ row }) => {
+//         const status = row.getValue("Status");
+//         const isActive = status === "Active";
+//         return (
+//           <div className={`text-xs font-medium px-3 py-1 rounded-md w-fit ${isActive ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}`}>
+//             {status || "-"}
+//           </div>
+//         );
+//       },
+//       size: 120,
+//     },
+//     {
+//       id: "actions",
+//       header: "Action",
+//       cell: ({ row }) => {
+//         return (
+//           <div className="flex flex-row">
+//             <TooltipProvider>
+//               <Tooltip>
+//                 <TooltipTrigger asChild>
+//                   <Button onClick={() => navigate(`/event-edit/${row.original.id}`)} variant="ghost" size="icon" className="h-8 w-8">
+//                     <Edit className="h-4 w-4" />
+//                   </Button>
+//                 </TooltipTrigger>
+//                 <TooltipContent>
+//                   <p>Edit Event</p>
+//                 </TooltipContent>
+//               </Tooltip>
+//             </TooltipProvider>
 
-             <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button onClick={() => navigate(`/event-edit-sub/${row.original.id}`)} variant="ghost" size="icon" className="h-8 w-8">
-                    <Edit3Icon className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Edit Sub Event</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-        );
-      },
-    },
-  ];
+//              <TooltipProvider>
+//               <Tooltip>
+//                 <TooltipTrigger asChild>
+//                   <Button onClick={() => navigate(`/event-edit-sub/${row.original.id}`)} variant="ghost" size="icon" className="h-8 w-8">
+//                     <Edit3Icon className="h-4 w-4" />
+//                   </Button>
+//                 </TooltipTrigger>
+//                 <TooltipContent>
+//                   <p>Edit Sub Event</p>
+//                 </TooltipContent>
+//               </Tooltip>
+//             </TooltipProvider>
+//           </div>
+//         );
+//       },
+//     },
+//   ];
 
-  const table = useReactTable({
-    data: eventData || [],
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      globalFilter,
-      columnVisibility,
-      rowSelection,
-    },
-    initialState: {
-      pagination: {
-        pageSize: 10,
-      },
-    },
-  });
+//   const table = useReactTable({
+//     data: eventData || [],
+//     columns,
+//     onSortingChange: setSorting,
+//     onColumnFiltersChange: setColumnFilters,
+//     onGlobalFilterChange: setGlobalFilter,
+//     getCoreRowModel: getCoreRowModel(),
+//     getPaginationRowModel: getPaginationRowModel(),
+//     getSortedRowModel: getSortedRowModel(),
+//     getFilteredRowModel: getFilteredRowModel(),
+//     onColumnVisibilityChange: setColumnVisibility,
+//     onRowSelectionChange: setRowSelection,
+//     state: {
+//       sorting,
+//       columnFilters,
+//       globalFilter,
+//       columnVisibility,
+//       rowSelection,
+//     },
+//     initialState: {
+//       pagination: {
+//         pageSize: 10,
+//       },
+//     },
+//   });
 
-  const TableShimmer = () => {
-    return Array.from({ length: 10 }).map((_, index) => (
-      <TableRow key={index} className="animate-pulse h-11">
-        {table.getVisibleFlatColumns().map((column) => (
-          <TableCell key={column.id} className="py-1">
-            <div className="h-8 bg-gray-200 rounded w-full"></div>
-          </TableCell>
-        ))}
-      </TableRow>
-    ));
-  };
+//   const TableShimmer = () => {
+//     return Array.from({ length: 10 }).map((_, index) => (
+//       <TableRow key={index} className="animate-pulse h-11">
+//         {table.getVisibleFlatColumns().map((column) => (
+//           <TableCell key={column.id} className="py-1">
+//             <div className="h-8 bg-gray-200 rounded w-full"></div>
+//           </TableCell>
+//         ))}
+//       </TableRow>
+//     ));
+//   };
 
-  if (isError) {
-    return (
-      <div className="w-full p-4">
-        <div className="flex items-center justify-center h-64">
-          <div className="text-center">
-            <div className="text-destructive font-medium mb-2">
-              Error Fetching Event Data
-            </div>
-            <Button onClick={() => refetch()} variant="outline" size="sm">
-              Try Again
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+//   if (isError) {
+//     return (
+//       <div className="w-full p-4">
+//         <div className="flex items-center justify-center h-64">
+//           <div className="text-center">
+//             <div className="text-destructive font-medium mb-2">
+//               Error Fetching Event Data
+//             </div>
+//             <Button onClick={() => refetch()} variant="outline" size="sm">
+//               Try Again
+//             </Button>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
 
   return (
     <div className="max-w-full">
-      <div className="flex items-center justify-between py-1">
+
+<div class="flex items-center justify-center ">
+  <center>
+    <h1 class="text-4xl font-bold text-gray-800">
+      <span class="text-blue-600">Coming</span>
+      <span class="text-gray-500 ml-2">Soon</span>
+    </h1>
+  </center>
+</div>
+
+      {/* <div className="flex items-center justify-between py-1">
         <div className="relative w-72">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
           <Input
@@ -346,7 +356,7 @@ const navigate = useNavigate()
             Next
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

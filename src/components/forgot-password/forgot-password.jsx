@@ -117,13 +117,13 @@ export default function ForgotPassword() {
       </div>
 
       <motion.div
-        className="flex flex-col md:flex-row shadow-2xl rounded-2xl overflow-hidden max-w-5xl w-full relative z-10"
+        className="flex flex-row shadow-2xl rounded-2xl overflow-hidden max-w-md w-full relative z-10"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         {/* Right Side - Slider */}
-        <div className="hidden md:flex flex-col items-center justify-center p-1 w-1/2 bg-gradient-to-br from-blue-50 to-indigo-100">
+        {/* <div className="hidden md:flex flex-col items-center justify-center p-1 w-1/2 bg-gradient-to-br from-blue-50 to-indigo-100">
           <div className="w-full h-full rounded-xl overflow-hidden shadow-lg">
             <Swiper
               modules={[Autoplay, EffectFade]}
@@ -156,9 +156,9 @@ export default function ForgotPassword() {
               ))}
             </Swiper>
           </div>
-        </div>
+        </div> */}
         {/* Left Side - Forgot Password Form */}
-        <div className="w-full md:w-1/2 px-4 py-8 md:py-0 flex items-center">
+        <div className="w-full  px-4 py-8 md:py-0 flex items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

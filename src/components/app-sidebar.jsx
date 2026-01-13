@@ -131,6 +131,24 @@ const NAVIGATION_CONFIG = {
         },
       ],
     },
+    PROMOTER: {
+      title: "Promoter",
+      url: "/promoter",
+      isActive: false,
+      icon: Package,
+    },
+    PANEL: {
+      title: "Panel Condition",
+      url: "/panel-condition",
+      isActive: false,
+      icon: Package,
+    },
+    EVENt: {
+      title: "Event List",
+      url: "/event-list",
+      isActive: false,
+      icon: Package,
+    },
   },
 
   REPORTS: {
@@ -200,10 +218,7 @@ const NAVIGATION_CONFIG = {
           title: "Notification",
           url: "/other/notification",
         },
-         {
-          title: "Event List",
-          url: "/event-list",
-        },
+       
       ],
     },
 
@@ -251,7 +266,7 @@ const NAVIGATION_CONFIG = {
 
 const USER_ROLE_PERMISSIONS = {
   1: {
-    navMain: ["DASHBOARD", "MEMBERSHIP", "DONOR", "RECEIPT", "SCHOOL"],
+    navMain: ["DASHBOARD", "MEMBERSHIP", "DONOR", "RECEIPT", "SCHOOL","PROMOTER","EVENt"],
     navMainReport: ["SUMMARY", "DOWNLOADS", "OTHER", "SETTINGS"],
   },
 
@@ -263,6 +278,9 @@ const USER_ROLE_PERMISSIONS = {
       "DONOR",
       "RECEIPT",
       "SCHOOL",
+      "PROMOTER",
+      "EVENt",
+     
     ],
     navMainReport: ["SUMMARY", "DOWNLOADS", "OTHER", "SETTINGS"],
   },
@@ -275,17 +293,20 @@ const USER_ROLE_PERMISSIONS = {
       "DONOR",
       "RECEIPT",
       "SCHOOL",
+      "PROMOTER",
+      "EVENt",
+      
     ],
     navMainReport: ["SUMMARY", "DOWNLOADS", "OTHER", "SETTINGS"],
   },
 
   4: {
-    navMain: ["DASHBOARD", "MEMBERSHIP", "DONOR", "RECEIPT", "SCHOOL"],
+    navMain: ["DASHBOARD", "MEMBERSHIP", "DONOR", "RECEIPT", "SCHOOL","PROMOTER","EVENt"],
     navMainReport: ["SUMMARY", "DOWNLOADS", "OTHER", "SETTINGS"],
   },
 
   5: {
-    navMain: ["DASHBOARD", "CHAPTER"],
+    navMain: ["DASHBOARD", "CHAPTER", 'PROMOTER',"PANEL","EVENt"],
     navMainReport: [
       "SETTINGS",
       "RECEIPT_ZERO",

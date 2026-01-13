@@ -10,6 +10,8 @@ import EventList from "@/app/event/event-list";
 import EventCreate from "@/app/event/event-create";
 import EventEdit from "@/app/event/event-edit";
 import EventEditSub from "@/app/event/event-edit-sub";
+import PromoterPendingList from "@/app/promoter/promoter-pending-list";
+import PanelConditionList from "@/app/panel-condition/panel-condition-list";
 const Login = lazy(() => import("@/app/auth/login"));
 const DonorList = lazy(() => import("@/app/donor/donor-list/donor-list"));
 const ReceiptCreate = lazy(() =>
@@ -367,6 +369,22 @@ function AppRoutes() {
           element={
             <Suspense fallback={<LoadingBar />}>
               <EventList />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/promoter"
+          element={
+            <Suspense fallback={<LoadingBar />}>
+              <PromoterPendingList />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/panel-condition"
+          element={
+            <Suspense fallback={<LoadingBar />}>
+              <PanelConditionList />
             </Suspense>
           }
         />

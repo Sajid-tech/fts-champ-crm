@@ -54,6 +54,7 @@ export default function Page({ children }) {
         <footer className="hidden sm:block sticky bottom-0 z-10  h-8 shrink-0 items-center gap-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
           <div className="flex items-center justify-between gap-2 p-2 text-xs rounded-md border-t-2 border-[var(--color-border)]">
             <span>© 2025-26 All Rights Reserved</span>
+            <span>updated version : v{Cookies.get('ver_con')}</span>
             <span>Crafted with ❤️ by AG Solutions</span>
           </div>
         </footer>

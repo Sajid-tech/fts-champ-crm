@@ -98,16 +98,21 @@ const PromoterPendingList = () => {
       cell: ({ row }) => {
         return (
           <div className="flex flex-row">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <EditPromoterPending name={row.original.promoter_name} />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Edit Promoter</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+        
+                 <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <EditPromoterPending 
+                                    name={row.original.promoter_name} 
+                                    refetchPendingPromoters={refetch}
+                                  />
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>Edit Promoter</p>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+               
           </div>
         );
       },

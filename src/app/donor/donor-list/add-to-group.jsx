@@ -92,7 +92,7 @@ const AddToGroup = ({ id, closegroupModal, page, isOpen }) => {
           queryClient.invalidateQueries(['donor', id]);
           break;
         case 'company':
-          queryClient.invalidateQueries(['donor-company', id]);
+          queryClient.invalidateQueries(['promoter-active', id]);
           break;
         default:
           break;

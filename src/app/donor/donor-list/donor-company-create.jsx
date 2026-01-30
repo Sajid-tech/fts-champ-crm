@@ -87,7 +87,7 @@ const DonorCompanyCreate = () => {
     indicomp_mobile_phone: "",
     indicomp_mobile_whatsapp: "",
     indicomp_email: "",
-
+ indicomp_is_promoter: "No",
     indicomp_website: "",
     indicomp_res_reg_address: "",
     indicomp_res_reg_area: "",
@@ -339,6 +339,7 @@ const DonorCompanyCreate = () => {
           indicomp_off_branch_pin_code: "",
           indicomp_corr_preffer: "Registered",
           indicomp_csr: "",
+           indicomp_is_promoter: "No",
         });
 
         navigate("/donor/donors");
@@ -380,7 +381,7 @@ const DonorCompanyCreate = () => {
       const formData = new FormData();
       formData.append("indicomp_full_name", donor.indicomp_full_name || "");
       formData.append("title", donor.title || "");
-
+  formData.append("indicomp_is_promoter", donor.indicomp_is_promoter);
       formData.append("indicomp_type", donor.indicomp_type || "");
       formData.append(
         "indicomp_com_contact_name",
@@ -799,6 +800,31 @@ const DonorCompanyCreate = () => {
                     onChange={onInputChange}
                     placeholder="Enter remarks"
                   />
+                </div>
+<div className=" ">
+                  <Label
+                    htmlFor="indicomp_is_promoter"
+                    className="text-xs font-medium"
+                  >
+                    Is Promoter?
+                  </Label>
+                  <Select
+                    value={donor.indicomp_is_promoter}
+                    onValueChange={(value) =>
+                      setDonor((prev) => ({
+                        ...prev,
+                        indicomp_is_promoter: value,
+                      }))
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Yes">Yes</SelectItem>
+                      <SelectItem value="No">No</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="flex flex-col justify-between">

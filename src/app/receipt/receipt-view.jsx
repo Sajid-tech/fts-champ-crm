@@ -169,7 +169,13 @@ const ReceiptOne = () => {
   },
 });
 
-
+const getFileName = (prefix = 'R') => {
+  const donorFirstName = receipts?.donor?.indicomp_full_name 
+    ? receipts.donor.indicomp_full_name.split(' ')[0]
+    : 'Unknown';
+  
+  return `${prefix}-${donorFirstName}-${receipts?.receipt_no || 'N/A'}`;
+};
   
   const updateEmailMutation = useMutation({
     mutationFn: (formData) => 
@@ -247,8 +253,10 @@ const ReceiptOne = () => {
         const imgWidth = pdfWidth - 2 * margin;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
+          
+const fileName = `${getFileName('R')}.pdf`;
         pdf.addImage(imgData, "PNG", margin, margin, imgWidth, imgHeight);
-        pdf.save("Receipt.pdf");
+        pdf.save(fileName);
         const followUpFormData = new FormData();
         followUpFormData.append('chapter_id', receipts.chapter_id);
         followUpFormData.append('indicomp_fts_id', receipts.indicomp_fts_id);
@@ -286,7 +294,7 @@ const ReceiptOne = () => {
 
   const handlPrintPdf = useReactToPrint({
     content: () => containerRef.current,
-    documentTitle: "letter-view",
+     documentTitle: () => getFileName('L'),
     pageStyle: `
       @page {
         size: auto;
@@ -325,7 +333,7 @@ const ReceiptOne = () => {
 
   const handlReceiptPdf = useReactToPrint({
     content: () => tableRef.current,
-    documentTitle: "receipt-view",
+     documentTitle: () => getFileName('R'),
     pageStyle: `
       @page {
         size: auto;

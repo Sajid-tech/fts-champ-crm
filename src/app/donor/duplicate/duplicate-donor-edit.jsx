@@ -54,7 +54,7 @@ const DuplicateDonorEdit = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isInitialDataLoaded, setIsInitialDataLoaded] = useState(false);
 
-  // Fetch duplicate donor details
+  
   const { data: donorData, isLoading: donorLoading, isError } = useQuery({
     queryKey: ["duplicateEdit", id],
     queryFn: async () => {
@@ -63,14 +63,14 @@ const DuplicateDonorEdit = () => {
     },
   });
 
-  // Fetch donors for select
+  // no need to show current 
   const { data: donors = [] } = useQuery({
     queryKey: ["donorsSelect", donor.indicomp_full_name, donor.indicomp_mobile_phone],
     queryFn: async () => {
       if (!donor.indicomp_full_name && !donor.indicomp_mobile_phone) return [];
       const token = Cookies.get("token");
       const response = await axios.get(
-        `${BASE_URL}/api/donor-duplicate-change?indicomp_full_name=${donor.indicomp_full_name}&indicomp_mobile_phone=${donor.indicomp_mobile_phone}`,
+        `${BASE_URL}/api/donor-duplicate-change?indicomp_full_name=${donor.indicomp_full_name}&indicomp_mobile_phone=${donor.indicomp_mobile_phone}&indicomp_fts_id=${donor.indicomp_fts_id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ const DuplicateDonorEdit = () => {
     },
   });
 
-  // useEffect to populate state
+  
   useEffect(() => {
     if (donorData && !isInitialDataLoaded) {
       setDonor({
@@ -182,9 +182,9 @@ const DuplicateDonorEdit = () => {
       </div>
 
       <div className="flex flex-col md:flex-row items-center w-full  ">
-        {/* Left Column - Donor Information */}
+      
         <div className=" flex flex-col md:flex-row">
-          {/* Duplicate Donor Card */}
+     
        
           <div className="border-l-2 border-l-orange-500 border-t border-b relative rounded-l-lg bg-white">
             <CardHeader className="pb-2">
@@ -208,8 +208,15 @@ const DuplicateDonorEdit = () => {
                 <CompactInfoRow label="Spouse Name" value={donor.indicomp_spouse_name} />
               </div>
             </CardContent>
+  <div className="mb-2 mx-5 text-center  font-bold">
+          
 
+                 <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200 text-xs">
+                  Selected to Delete
+                </Badge>
+            </div>
             <div className="bg-blue-50 border-blue-200 absolute bottom-0 rounded-b-lg">
+          
             <CardHeader className="pb-2">
               <CardTitle className="text-xs flex items-center gap-1">
                 <AlertTriangle className="h-3 w-3" />
@@ -228,7 +235,7 @@ const DuplicateDonorEdit = () => {
  {/* Donors Table */}
  <div className="bg-white border">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base">Available Donors</CardTitle>
+              <CardTitle className="text-base">Select donor from below to replace with:</CardTitle>
               <CardDescription className="text-xs">
                 Browse and select from all available donor records
               </CardDescription>

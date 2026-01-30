@@ -150,7 +150,7 @@ const ChapterSelection = () => {
     onError: () => toast.error("Something went wrong"),
   });
 
-  if (userType !== "4" && userType !== "5") return null;
+  if (userType !== "4" && userType !== "5" && userType !== "3") return null;
 
   return (
     <div ref={containerRef} className="fixed top-4 right-4 z-50">

@@ -76,6 +76,7 @@ const DonorCompanyEdit = () => {
     indicomp_image_logo: "",
     indicomp_remarks: "",
     indicomp_promoter: "",
+      indicomp_is_promoter: "No",
     indicomp_newpromoter: "",
     indicomp_belongs_to: "",
     indicomp_source: "",
@@ -328,6 +329,10 @@ const DonorCompanyEdit = () => {
       processValue(donor.indicomp_full_name)
     );
     formData.append("title", processValue(donor.title));
+      formData.append(
+      "indicomp_is_promoter",
+      processValue(donor.indicomp_is_promoter)
+    );
     formData.append("indicomp_type", processValue(donor.indicomp_type));
     formData.append(
       "indicomp_com_contact_name",
@@ -758,7 +763,31 @@ const DonorCompanyEdit = () => {
                     placeholder="Enter remarks"
                   />
                 </div>
-
+<div className=" ">
+                  <Label
+                    htmlFor="indicomp_is_promoter"
+                    className="text-xs font-medium"
+                  >
+                    Is Promoter?
+                  </Label>
+                  <Select
+                    value={donor.indicomp_is_promoter}
+                    onValueChange={(value) =>
+                      setDonor((prev) => ({
+                        ...prev,
+                        indicomp_is_promoter: value,
+                      }))
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Yes">Yes</SelectItem>
+                      <SelectItem value="No">No</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
                 {/* Promoter */}
                 <div className="">
                   <Label
